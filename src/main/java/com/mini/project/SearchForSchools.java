@@ -1,10 +1,9 @@
-package com.mini.project;
+package miniProject.SearchForSchools;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
-import org.openqa.selenium.chrome.ChromeDriver;
+//import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.edge.EdgeDriver;
-import org.openqa.selenium.firefox.FirefoxDriver;
 import org.openqa.selenium.support.ui.Select;
 
 //import java.util.*;
@@ -15,30 +14,36 @@ public class SearchForSchools {
 //    @SuppressWarnings("deprecation")
 	public static void main(String[] args) throws Exception {
         // Set the path for the browser driver executable
-        String driverPath = "S:\\Eclipse\\project\\project\\resource\\chromedriver.exe";
-
+//        String driverPath = "C:\\Users\\2263291\\Downloads\\workspace\\SearchForSchools\\resource\\chromedriver.exe";
+        String driverPath ="C:\\Users\\2263291\\Downloads\\workspace\\SearchForSchools\\resource\\msedgedriver.exe";
         // Choose the browser to use
-        WebDriver driver = chooseBrowser("chrome", driverPath);
+//      WebDriver driver = chooseBrowser("chrome", driverPath);
+      WebDriver driver = chooseBrowser("edge", driverPath);
 
         // Navigate to the Eduvidya website
         driver.manage().window().maximize();
 //        driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
         driver.get("https://www.eduvidya.com/");
         
-        WebElement menuBtn = driver.findElement(By.xpath("//*[@id='menu-button']"));
-        menuBtn.click();
-        Thread.sleep(3000);
+//        WebElement menuBtn = driver.findElement(By.xpath("//*[@id='menu-button']"));
+//        menuBtn.click();
+//        Thread.sleep(3000);
         
         // Click on the "Schools" link in the menu bar
-        WebElement schoolsLink = driver.findElement(By.linkText("Schools"));
+        WebElement schoolsLink = driver.findElement(By.xpath("//*[@id='cssmenu']/ul/li[4]/a"));
         schoolsLink.click();
+        
+        //Dismiss the Ad
+        WebElement adv=driver.findElement(By.xpath("//div[@id='dismiss-button']"));
+        adv.click();
 
         // Select "CBSE" from the "Course-Type" dropdown
-        WebElement courseTypeDropdown = driver.findElement(By.id("s2id_autogen2"));
-        courseTypeDropdown.click();
+//        WebElement courseTypeDropdown = driver.findElement(By.id("ddl_Category"));
+//        courseTypeDropdown.click();
 
-        Select courseTypeSelect = new Select(courseTypeDropdown.findElement(By.xpath("//input[@class='select2-input select2-default']")));
+        Select courseTypeSelect = new Select(driver.findElement(By.id("ddl_Category")));
         courseTypeSelect.selectByVisibleText("CBSE");
+        
 
         // Select "Pune" from the "City" dropdown
         WebElement cityDropdown = driver.findElement(By.id("s2id_autogen3"));
@@ -56,7 +61,7 @@ public class SearchForSchools {
         assert searchResults.isDisplayed();
 
         // Close the browser
-//        driver.quit();
+        driver.quit();
     }
 
     public static WebDriver chooseBrowser(String browser, String driverPath) {
@@ -64,15 +69,15 @@ public class SearchForSchools {
 //    	System.out.println("Enter the Browser name");
 //    	browser=sc.nextLine();
         switch (browser.toLowerCase()) {
-//            case "edge":
-//                System.setProperty("webdriver.edge.driver", driverPath);
-//                return new EdgeDriver();
+            case "edge":
+                System.setProperty("webdriver.edge.driver", driverPath);
+                return new EdgeDriver();
             case "chrome":
                 System.setProperty("webdriver.chrome.driver", driverPath);
-                return new ChromeDriver();
+//                return new ChromeDriver();
             case "firefox":
                 System.setProperty("webdriver.gecko.driver", driverPath);
-                return new FirefoxDriver();
+//                return new FirefoxDriver();
             default:
                 throw new IllegalArgumentException("Unsupported browser: " + browser);
         }
