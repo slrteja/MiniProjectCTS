@@ -15,7 +15,7 @@ import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.Select;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
-public class MiniProject_2263291_SearchForSchools {
+public class SearchForSchools {
     private static final Logger LOGGER = Logger.getLogger(MiniProject_2263291_SearchForSchools.class.getName());
     private static String browser;
     private static String driverPath;
@@ -27,11 +27,11 @@ public class MiniProject_2263291_SearchForSchools {
         browser = sc.nextLine();
         switch (browser.toLowerCase()) {
             case "edge":
-                driverPath = "C:\\Users\\2263291\\Downloads\\workspace\\SearchForSchools\\resource\\msedgedriver.exe";
+                driverPath = "C:\\Users\\**\\Downloads\\workspace\\SearchForSchools\\resource\\msedgedriver.exe";
                 System.setProperty("webdriver.edge.driver", driverPath);
                 return new EdgeDriver();
             case "chrome":
-                driverPath = "C:\\Users\\2263291\\Downloads\\workspace\\SearchForSchools\\resource\\chromedriver.exe";
+                driverPath = "C:\\Users\\**\\Downloads\\workspace\\SearchForSchools\\resource\\chromedriver.exe";
                 System.setProperty("webdriver.chrome.driver", driverPath);
                 return new ChromeDriver();
             default:
